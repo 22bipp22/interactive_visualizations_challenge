@@ -16,29 +16,30 @@ function mydropDown(data) {
             
         let options = dropDown.append("option");
         options.text(selectionVal);
-        options.property("value", name);
+        options.attr("value", name);
     
     });
 };
 // d3.select("selDataset").on("change", optionChanged);
 
-// Submit Button handler
+// Dropdown selection event handler
 function optionChanged() {
     // // Prevent the page from refreshing
     // d3.event.preventDefault();
   
     // Select the input value from the form
-    let newValue = d3.select(this);
-    let newThingy = newValue.property("value"); 
-    // .node().value;
+    let newValue = d3.select(this).node();
+
+    //***I can not get the value of the selection!!!! */
+    // let newMicrobe = newValue.text(); 
+   
     console.log(newValue);
-    console.log(newThingy);
+    // console.log(newMicrobe);
   
     // clear the input value
     // d3.select("#selDataset").node().value = "";
   
-    // Build the plot with the new stock
-    // buildPlot(stock);
+    
   }
 
 let microbe = 940;
