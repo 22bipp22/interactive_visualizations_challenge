@@ -1,15 +1,20 @@
+//Read the json, assign it to a variable then call the function to populate the dropdown menu
 d3.json("samples.json").then((data) => {
+    let bellyButtonData = data;
     mydropDown(data);
-});
+    
+});  
 
 //Populate the dropdown with the data from json
 function mydropDown(data) {
     
+    //Grab the OTU number from the data (names field)
     let nameVal = data.names;
-    // console.log(nameVal);
+
     let dropDown = d3.select("#selDataset");
     dropDown.html("");
 
+    //Populate the dropdown options with the OTU number, adding the letters OTU before each one
     nameVal.forEach((name) => {
         
         let selectionVal = "OTU " + name;
@@ -20,41 +25,39 @@ function mydropDown(data) {
     
     });
 };
-// d3.select("selDataset").on("change", optionChanged);
+
 
 // Dropdown selection event handler
 function optionChanged() {
-    // // Prevent the page from refreshing
-    // d3.event.preventDefault();
-  
-    // Select the input value from the form
+    
+    // Reference the value selected and assign it to a variable
     let newValue = d3.select("#selDataset").property("value");
 
+    //Pull in the data and get the Key(index) for the selected item
     d3.json("samples.json").then((data) => {
-        mynewData(data);
-    });
+        let bellyButtonData = data.names;
+        // console.log(bellyButtonData);
+        let newIndex = getKeyByValue(bellyButtonData, newValue)
+        console.log(newIndex, newValue);
+        buildPlot(newIndex, newValue);
+        }) 
     
-    function mynewData(data) {     
-        let newIndex = data.map(function(x) { return x.names; }).indexOf(newValue)
-        console.log(newIndex);
-    }
-    // d3.json("samples.json").then((newSel) => {
-    //     console.log(newSel.map(function(x) { return x.names; }).indexOf(newValue))
-        
-    // });
-    // clear the input value
-    // d3.select("#selDataset").node().value = "";
-  
+    //Function to get the key from the data
+    function getKeyByValue(object, value) { 
+        return Object.keys(object).find(key => object[key] === value); 
     
-  }
+    }; 
+    
+};
 
+//Set the initial values for populating the webpage with the plot and call the function to build the plot
 let microbe = 940;
-let key = 0;
-    
-builtPlot(key, microbe);
+let key = 0;    
 
+buildPlot(key, microbe);
 
-function builtPlot(key, microbe) {
+//Builds the horizontal bar chart on the webpage
+function buildPlot(key, microbe) {
     d3.json("samples.json").then((sampleData) => {
         // console.log(sampleData);
         let otuSamples = sampleData.samples;
@@ -88,7 +91,7 @@ function builtPlot(key, microbe) {
         let dataTrace = [trace1];
 
         let layout = {
-            title: "This is shit!!"
+            title: `Data for OTU ${microbe}`
         }
 
         Plotly.newPlot("plot", dataTrace, layout);
