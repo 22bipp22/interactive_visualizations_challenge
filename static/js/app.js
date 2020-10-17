@@ -28,14 +28,20 @@ function optionChanged() {
     // d3.event.preventDefault();
   
     // Select the input value from the form
-    let newValue = d3.select(this).node();
+    let newValue = d3.select("#selDataset").property("value");
 
-    //***I can not get the value of the selection!!!! */
-    // let newMicrobe = newValue.text(); 
-   
-    console.log(newValue);
-    // console.log(newMicrobe);
-  
+    d3.json("samples.json").then((data) => {
+        mynewData(data);
+    });
+    
+    function mynewData(data) {     
+        let newIndex = data.map(function(x) { return x.names; }).indexOf(newValue)
+        console.log(newIndex);
+    }
+    // d3.json("samples.json").then((newSel) => {
+    //     console.log(newSel.map(function(x) { return x.names; }).indexOf(newValue))
+        
+    // });
     // clear the input value
     // d3.select("#selDataset").node().value = "";
   
@@ -50,26 +56,26 @@ builtPlot(key, microbe);
 
 function builtPlot(key, microbe) {
     d3.json("samples.json").then((sampleData) => {
-        console.log(sampleData);
+        // console.log(sampleData);
         let otuSamples = sampleData.samples;
-        console.log(otuSamples);
+        // console.log(otuSamples);
         let sampleId = otuSamples[key];
         
 
-        console.log(sampleId);
+        // console.log(sampleId);
         let otuIds = sampleId.otu_ids.slice(0,10);
-        console.log(otuIds);
+        // console.log(otuIds);
         let otuValues = sampleId.sample_values.slice(0,10);
-        console.log(otuValues);
+        // console.log(otuValues);
         
         let otuIdsLabels = [];
         otuIds.forEach((id) => {
             // let text = "OTU "
             let otuIdsLabel = "OTU " + (id);
-            console.log(otuIdsLabel);
+            // console.log(otuIdsLabel);
             otuIdsLabels.push(otuIdsLabel);
         });
-        console.log(otuIdsLabels);
+        // console.log(otuIdsLabels);
 
         let trace1 = {
             x: otuValues,
