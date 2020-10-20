@@ -174,35 +174,7 @@ function populateMetaData(key, value) {
                 domain: {
                     x: [0,1],
                     y: [0, 1]
-                  },
-                
-                // domain: { x: [0, 1], y: [0, 1] },
-                // value: metaWfreq,
-                // // title: { text: "Belly Button Washing Frequency" },
-                // // subtitle: { text: "Scrubs per Week" },
-                // type: "indicator",
-                // gauge: { 
-                //     axis: { visible: false, range: [0, 9] },
-                //     bar: { color: "transparent" },
-                //     steps: [
-                //         { range: [0, 1], color: "lightblue" },
-                //         { range: [1, 2], color: "lightskyblue" },
-                //         { range: [2, 3], color: "deepskyblue" },
-                //         { range: [3, 4], color: "cornflowerblue" },
-                //         { range: [4, 5], color: "royalblue" },
-                //         { range: [5, 6], color: "blue" },
-                //         { range: [6, 7], color: "mediumblue" },
-                //         { range: [7, 8], color: "darkblue" },
-                //         { range: [8, 9], color: "navy" }
-                //     ],
-                //     labels: ["0-1", "1-2", "2-3", "3-4", "4-5", "5-6", "6-7", "7-8", "8-9"],
-                //     textinfo: "label",
-                //     insidetextorientation: "radial"
-                    
-                // },
-                // mode: "gauge+number",
-                
-                
+                  },  
             }
         ];
                 
