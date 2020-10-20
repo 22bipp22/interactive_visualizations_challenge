@@ -117,7 +117,8 @@ function buildPlots(key, microbe) {
         let dataTrace2 = [trace2];
 
         let layout2 = {
-            title: `Microbes for Test Subject ID #${microbe}`
+            title: `Microbes for Test Subject ID #${microbe}`,
+            xaxis: { title: "OTU ID"}
             
         }
         Plotly.newPlot("bubble", dataTrace2, layout2);
@@ -156,18 +157,145 @@ function populateMetaData(key, value) {
 
         //Use the metaData Washing Frequency to populate the gauge chart
         let trace3 = [
-            {
-                domain: { x: [0, 1], y: metaWfreq },
-                value: 270,
-                title: { text: "Speed" },
-                type: "indicator",
-                mode: "gauge+number"
+            {   
+                values: [ 5.55, 5.55, 5.55, 5.55, 5.55, 5.55, 5.55, 5.55, 5.55, 50.05 ],
+                text: ["0-1", "1-2", "2-3", "3-4", "4-5", "5-6", "6-7", "7-8", "8-9", ""],
+                marker: {
+                    colors: ["lightblue","lightskyblue", "deepskyblue", "cornflowerblue", "royalblue",
+                            "blue", "mediumblue", "darkblue", "navy", "transparent"]
+                },
+                hole: .4,
+                type: 'pie',
+                rotation: 90,
+                direction: "clockwise",
+                textinfo: 'text',
+                textposition: 'inside',
+                showlegend: false,
+                domain: {
+                    x: [0,1],
+                    y: [0, 1]
+                  },
+                
+                // domain: { x: [0, 1], y: [0, 1] },
+                // value: metaWfreq,
+                // // title: { text: "Belly Button Washing Frequency" },
+                // // subtitle: { text: "Scrubs per Week" },
+                // type: "indicator",
+                // gauge: { 
+                //     axis: { visible: false, range: [0, 9] },
+                //     bar: { color: "transparent" },
+                //     steps: [
+                //         { range: [0, 1], color: "lightblue" },
+                //         { range: [1, 2], color: "lightskyblue" },
+                //         { range: [2, 3], color: "deepskyblue" },
+                //         { range: [3, 4], color: "cornflowerblue" },
+                //         { range: [4, 5], color: "royalblue" },
+                //         { range: [5, 6], color: "blue" },
+                //         { range: [6, 7], color: "mediumblue" },
+                //         { range: [7, 8], color: "darkblue" },
+                //         { range: [8, 9], color: "navy" }
+                //     ],
+                //     labels: ["0-1", "1-2", "2-3", "3-4", "4-5", "5-6", "6-7", "7-8", "8-9"],
+                //     textinfo: "label",
+                //     insidetextorientation: "radial"
+                    
+                // },
+                // mode: "gauge+number",
+                
+                
             }
         ];
                 
-        let layout = { width: 600, height: 500, margin: { t: 0, b: 0 } };
+        let layout = { width: 600, 
+            height: 600, 
+            margin: { t: 45, b: 10 },
+            title: "Belly Button Washing Frequency",
+            font: { color: "royalblue", family: "Arial", size: 18 },
+            annotations: [
+                { 
+                    text: "Scrubs per Week",
+                    font: { color: "darkskyblue", size: 18},
+                    align: "center",
+                    x: .5,
+                    y: 1,
+                    showarrow: false
+                    }],
+            shapes:[{
+                type: 'path',
+                // path: 'M .5 .5 L .5 .5 L .77, .68Z',
+                path: gaugePointer(metaWfreq),
+                fillcolor: '850000',
+                line: {
+                    color: '850000'
+                }
+            }],
+            // autosize: true,
+            // xaxis: {zeroline:true, showticklabels:true,
+            //     showgrid: true, range: [-1, 1]},
+            // yaxis: {zeroline:true, showticklabels:true,
+            //     showgrid: true, range: [-1, 1]}
+        };
+
+        Plotly.newPlot('gauge', trace3, layout);
+
+        function gaugePointer(value){
+            
+            //set x and y for zero or null value
+            let x = .1;
+            let y = .5;
+
+            //set x and y for 1-9
+            switch(value) { 
+            case 1:  
+                x = .11; 
+                y = .61;
+                break;
+            case 2:
+                x = .22;
+                y = .7;
+                break;
+            case 3:
+                x = .33;
+                y = .75;
+                break;
+            case 4:
+                x = .44; 
+                y = .8;
+                break;
+            case 5:
+                x = .55;
+                y = .75;
+                break;
+            case 6:
+                x = .66;
+                y = .72;
+                break;
+            case 7:
+                x = .77;
+                y = .68;
+                break;
+            case 8:
+                x = .88;
+                y = .61;
+                break;
+            case 9:
+                x = .85;
+                y = .5;
+                break;
+            };
+            
+            console.log(x, y)
+            let mainPath = 'M .5 .5 L .5 0.5 L ',
+            pathX = String(x),
+            pathY = String(y),
+            pathEnd = ' Z';
+            let path = mainPath.concat(`${pathX} ${pathY}${pathEnd}`);
+            console.log(path)
         
-        Plotly.newPlot('gauge', data, layout);
+            return path;
+        };
+        
+        
     });
 }
 
