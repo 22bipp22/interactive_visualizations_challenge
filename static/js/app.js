@@ -126,6 +126,7 @@ function buildPlots(key, microbe) {
     });
 };
 
+//Populate the info box with the metadata from the sample chosen. 
 function populateMetaData(key, value) {
     d3.json("samples.json").then((data) => {
         
