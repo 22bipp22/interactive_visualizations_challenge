@@ -201,11 +201,7 @@ function populateMetaData(key, value) {
                     color: '850000'
                 }
             }],
-            // autosize: true,
-            // xaxis: {zeroline:true, showticklabels:true,
-            //     showgrid: true, range: [-1, 1]},
-            // yaxis: {zeroline:true, showticklabels:true,
-            //     showgrid: true, range: [-1, 1]}
+        
         };
 
         Plotly.newPlot('gauge', trace3, layout);
