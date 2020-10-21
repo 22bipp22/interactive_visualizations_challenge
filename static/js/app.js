@@ -195,7 +195,6 @@ function populateMetaData(key, value) {
                     }],
             shapes:[{
                 type: 'path',
-                // path: 'M .5 .5 L .5 .5 L .77, .68Z',
                 path: gaugePointer(metaWfreq),
                 fillcolor: '850000',
                 line: {
