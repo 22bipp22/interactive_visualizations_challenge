@@ -1,7 +1,7 @@
 //Read the json, assign it to a variable then call the function to populate the dropdown menu
 d3.json("samples.json").then((data) => {
     mydropDown(data);
-    // console.log(data)
+    
 });  
 
 //Populate the dropdown with the data from json
@@ -34,7 +34,6 @@ function optionChanged() {
     //Pull in the data and get the Key(index) for the selected item
     d3.json("samples.json").then((data) => {
         let bellyButtonData = data.names;
-        // console.log(bellyButtonData);
         let newIndex = getKeyByValue(bellyButtonData, newValue)
         console.log(newIndex, newValue);
         buildPlots(newIndex, newValue);
@@ -56,7 +55,7 @@ let key = 0;
 buildPlots(key, microbe);
 populateMetaData(key, microbe);
 
-//Builds the horizontal bar chart on the webpage
+//Builds the horizontal bar chart and the bubble chart on the webpage
 function buildPlots(key, microbe) {
     d3.json("samples.json").then((sampleData) => {
         // console.log(sampleData);
@@ -206,6 +205,7 @@ function populateMetaData(key, value) {
 
         Plotly.newPlot('gauge', trace3, layout);
 
+        //Function to set the path of the gauges needle
         function gaugePointer(value){
             
             //set x and y for zero or null value
@@ -266,9 +266,3 @@ function populateMetaData(key, value) {
         
     });
 }
-
-// function unpack(rows, index) {
-//     return rows.map(function(row) {
-//       return row[index];
-//     });
-//   }
