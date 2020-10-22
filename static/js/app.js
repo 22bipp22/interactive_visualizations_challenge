@@ -130,7 +130,10 @@ function populateMetaData(key, value) {
     d3.json("samples.json").then((data) => {
         
         let metaData = data.metadata;
-        console.log(metaData);
+        metaData.forEach(function(princess) {
+            console.log(`${princess.id}: ${princess.wfreq}`)
+          });
+        
         let metaSelected = metaData[key];
         console.log(metaSelected);
 
@@ -225,6 +228,10 @@ function populateMetaData(key, value) {
             case 3:
                 x = .33;
                 y = .75;
+                break;
+            case 3.5:
+                x = .38;
+                y = .78;
                 break;
             case 4:
                 x = .44; 
